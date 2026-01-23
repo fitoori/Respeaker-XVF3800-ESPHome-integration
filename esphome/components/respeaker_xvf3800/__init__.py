@@ -47,6 +47,11 @@ DFUProgressTrigger = respeaker_xvf3800_ns.class_(
 )
 DFUStartTrigger = respeaker_xvf3800_ns.class_("DFUStartTrigger", automation.Trigger.template())
 
+def _validate_platform(config):
+    if not core.CORE.is_esp32:
+        raise cv.Invalid("Respeaker XVF3800 is only supported on ESP32 targets.")
+    return config
+
 
 def _compute_local_file_path(url: str) -> Path:
     h = hashlib.new("sha256")
@@ -74,60 +79,63 @@ def download_firmware(config):
     return config
 
 # Define the configuration schema for the component
-CONFIG_SCHEMA = cv.Schema({
-    cv.GenerateID(): cv.declare_id(RespeakerXVF3800),
-    cv.Optional(CONF_MUTE_SWITCH): switch.switch_schema(
-        MuteSwitch,
-        icon="mdi:microphone-off",
-    ).extend(cv.polling_component_schema("1s")),
-    cv.Optional(CONF_DFU_VERSION): text_sensor.text_sensor_schema(
-        DFUVersionTextSensor,
-        icon="mdi:chip",
-    ).extend(cv.polling_component_schema("30s")),
-    cv.Optional(CONF_LED_BEAM_SENSOR): sensor.sensor_schema(
-        LEDBeamSensor,
-        icon="mdi:led-on",
-        accuracy_decimals=0,
-        unit_of_measurement="",
-    ).extend(cv.polling_component_schema("500ms")),
-    cv.GenerateID(CONF_RAW_DATA_ID): cv.declare_id(cg.uint8),
-    cv.Optional(CONF_FIRMWARE): cv.All(
-                {
-                    cv.Required(CONF_URL): cv.url,
-                    cv.Required(CONF_VERSION): cv.version_number,
-                    cv.Required(CONF_MD5): cv.All(cv.string, cv.Length(min=32, max=32)),
-                    cv.Optional(CONF_ON_BEGIN): automation.validate_automation(
-                        {
-                            cv.GenerateID(CONF_TRIGGER_ID): cv.declare_id(
-                                DFUStartTrigger
-                            ),
-                        }
-                    ),
-                    cv.Optional(CONF_ON_END): automation.validate_automation(
-                        {
-                            cv.GenerateID(CONF_TRIGGER_ID): cv.declare_id(
-                                DFUEndTrigger
-                            ),
-                        }
-                    ),
-                    cv.Optional(CONF_ON_ERROR): automation.validate_automation(
-                        {
-                            cv.GenerateID(CONF_TRIGGER_ID): cv.declare_id(
-                                DFUErrorTrigger
-                            ),
-                        }
-                    ),
-                    cv.Optional(CONF_ON_PROGRESS): automation.validate_automation(
-                        {
-                            cv.GenerateID(CONF_TRIGGER_ID): cv.declare_id(
-                                DFUProgressTrigger
-                            ),
-                        }
-                    ),
-                },
-                download_firmware,
-            ),
-}).extend(cv.COMPONENT_SCHEMA).extend(i2c.i2c_device_schema(0x2C))
+CONFIG_SCHEMA = cv.All(
+    cv.Schema({
+        cv.GenerateID(): cv.declare_id(RespeakerXVF3800),
+        cv.Optional(CONF_MUTE_SWITCH): switch.switch_schema(
+            MuteSwitch,
+            icon="mdi:microphone-off",
+        ).extend(cv.polling_component_schema("1s")),
+        cv.Optional(CONF_DFU_VERSION): text_sensor.text_sensor_schema(
+            DFUVersionTextSensor,
+            icon="mdi:chip",
+        ).extend(cv.polling_component_schema("30s")),
+        cv.Optional(CONF_LED_BEAM_SENSOR): sensor.sensor_schema(
+            LEDBeamSensor,
+            icon="mdi:led-on",
+            accuracy_decimals=0,
+            unit_of_measurement="",
+        ).extend(cv.polling_component_schema("500ms")),
+        cv.GenerateID(CONF_RAW_DATA_ID): cv.declare_id(cg.uint8),
+        cv.Optional(CONF_FIRMWARE): cv.All(
+                    {
+                        cv.Required(CONF_URL): cv.url,
+                        cv.Required(CONF_VERSION): cv.version_number,
+                        cv.Required(CONF_MD5): cv.All(cv.string, cv.Length(min=32, max=32)),
+                        cv.Optional(CONF_ON_BEGIN): automation.validate_automation(
+                            {
+                                cv.GenerateID(CONF_TRIGGER_ID): cv.declare_id(
+                                    DFUStartTrigger
+                                ),
+                            }
+                        ),
+                        cv.Optional(CONF_ON_END): automation.validate_automation(
+                            {
+                                cv.GenerateID(CONF_TRIGGER_ID): cv.declare_id(
+                                    DFUEndTrigger
+                                ),
+                            }
+                        ),
+                        cv.Optional(CONF_ON_ERROR): automation.validate_automation(
+                            {
+                                cv.GenerateID(CONF_TRIGGER_ID): cv.declare_id(
+                                    DFUErrorTrigger
+                                ),
+                            }
+                        ),
+                        cv.Optional(CONF_ON_PROGRESS): automation.validate_automation(
+                            {
+                                cv.GenerateID(CONF_TRIGGER_ID): cv.declare_id(
+                                    DFUProgressTrigger
+                                ),
+                            }
+                        ),
+                    },
+                    download_firmware,
+                ),
+    }).extend(cv.COMPONENT_SCHEMA).extend(i2c.i2c_device_schema(0x2C)),
+    _validate_platform,
+)
 
 
 OTA_RESPEAKER_XVF3800_FLASH_ACTION_SCHEMA = cv.Schema(

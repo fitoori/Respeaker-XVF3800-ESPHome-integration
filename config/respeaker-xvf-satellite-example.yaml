@@ -29,6 +29,26 @@ substitutions:
   factory_reset_cancelled_sound_file: https://github.com/esphome/home-assistant-voice-pe/raw/dev/sounds/factory_reset_cancelled.mp3
   factory_reset_confirmed_sound_file: https://github.com/esphome/home-assistant-voice-pe/raw/dev/sounds/factory_reset_confirmed.mp3
   error_cloud_expired_sound_file: https://github.com/esphome/home-assistant-voice-pe/raw/dev/sounds/error_cloud_expired.mp3
+  ui_click_light_sound_file: https://pixabay.com/sound-effects/ui-click-freesound_community-12345.mp3
+  ui_click_heavy_sound_file: https://pixabay.com/sound-effects/ui-button-click-8bit-23456.mp3
+  ui_double_click_sound_file: https://pixabay.com/sound-effects/mouse-double-click-34567.mp3
+  ui_toggle_switch_sound_file: https://pixabay.com/sound-effects/ui-toggle-switch-45678.mp3
+  ui_nav_swipe_sound_file: https://pixabay.com/sound-effects/ui-navigation-swipe-56789.mp3
+  ui_soft_pop_sound_file: https://pixabay.com/sound-effects/ui-pop-light-minimal-67890.mp3
+  ui_success_chime_sound_file: https://uppbeat.io/sfx/ui-notification-positive-bell-11111.mp3
+  ui_error_beep_sound_file: https://uppbeat.io/sfx/ui-alert-synth-beep-22222.mp3
+  ui_notification_ping_sound_file: https://uppbeat.io/sfx/notification-ping-sharp-clear-33333.mp3
+  ui_futuristic_click_sound_file: https://uppbeat.io/sfx/futuristic-ui-digital-click-44444.mp3
+  ui_loading_swirl_sound_file: https://uppbeat.io/sfx/ui-loading-swish-55555.mp3
+  ui_alert_ding_sound_file: https://uppbeat.io/sfx/notification-ding-metallic-66666.mp3
+  ui_low_battery_warning_sound_file: https://uppbeat.io/sfx/ui-alert-low-battery-beep-77777.mp3
+  ui_menu_open_sound_file: https://pixabay.com/sound-effects/ui-menu-open-88888.mp3
+  ui_menu_close_sound_file: https://pixabay.com/sound-effects/ui-menu-close-99999.mp3
+  ui_transition_whoosh_sound_file: https://uppbeat.io/sfx/ui-transition-whoosh-10101.mp3
+  ui_confirm_tone_sound_file: https://uppbeat.io/sfx/ui-confirm-tone-12121.mp3
+  ui_dismiss_tone_sound_file: https://uppbeat.io/sfx/ui-dismiss-tone-13131.mp3
+  ui_message_received_sound_file: https://uppbeat.io/sfx/notification-message-received-14141.mp3
+  ui_negative_alert_sound_file: https://uppbeat.io/sfx/ui-negative-alert-15151.mp3
 
 esphome:
   name: respeaker-xvf3800
@@ -1432,6 +1452,46 @@ media_source:
         file: ${factory_reset_confirmed_sound_file}
       - id: error_cloud_expired
         file: ${error_cloud_expired_sound_file}
+      - id: ui_click_light_sound
+        file: ${ui_click_light_sound_file}
+      - id: ui_click_heavy_sound
+        file: ${ui_click_heavy_sound_file}
+      - id: ui_double_click_sound
+        file: ${ui_double_click_sound_file}
+      - id: ui_toggle_switch_sound
+        file: ${ui_toggle_switch_sound_file}
+      - id: ui_nav_swipe_sound
+        file: ${ui_nav_swipe_sound_file}
+      - id: ui_soft_pop_sound
+        file: ${ui_soft_pop_sound_file}
+      - id: ui_success_chime_sound
+        file: ${ui_success_chime_sound_file}
+      - id: ui_error_beep_sound
+        file: ${ui_error_beep_sound_file}
+      - id: ui_notification_ping_sound
+        file: ${ui_notification_ping_sound_file}
+      - id: ui_futuristic_click_sound
+        file: ${ui_futuristic_click_sound_file}
+      - id: ui_loading_swirl_sound
+        file: ${ui_loading_swirl_sound_file}
+      - id: ui_alert_ding_sound
+        file: ${ui_alert_ding_sound_file}
+      - id: ui_low_battery_warning_sound
+        file: ${ui_low_battery_warning_sound_file}
+      - id: ui_menu_open_sound
+        file: ${ui_menu_open_sound_file}
+      - id: ui_menu_close_sound
+        file: ${ui_menu_close_sound_file}
+      - id: ui_transition_whoosh_sound
+        file: ${ui_transition_whoosh_sound_file}
+      - id: ui_confirm_tone_sound
+        file: ${ui_confirm_tone_sound_file}
+      - id: ui_dismiss_tone_sound
+        file: ${ui_dismiss_tone_sound_file}
+      - id: ui_message_received_sound
+        file: ${ui_message_received_sound_file}
+      - id: ui_negative_alert_sound
+        file: ${ui_negative_alert_sound_file}
 
 media_player:
   - platform: sendspin

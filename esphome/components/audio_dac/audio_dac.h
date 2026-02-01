@@ -1,11 +1,9 @@
 #pragma once
 
-#include "esphome/core/component.h"
-
 namespace esphome {
 namespace audio_dac {
 
-class AudioDac : public Component {
+class AudioDac {
  public:
   virtual bool set_mute_on() = 0;
   virtual bool set_mute_off() = 0;

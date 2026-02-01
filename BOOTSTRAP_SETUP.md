@@ -15,7 +15,7 @@ This document describes the bootstrap setup required to prepare the ReSpeaker XV
 All 5 critical bugs identified in the audit have been **FIXED AND VERIFIED**:
 
 #### 1. ✅ Missing Member Variable in AIC3104 Header
-- **File:** `esphome/components/aic3104/aic3104.h`
+- **File:** `esphome/components/audio_dac/aic3104.h`
 - **Status:** VERIFIED - `bool is_muted_{false};` present in class definition
 
 #### 2. ✅ Memory Safety Issue in load_buf_()
@@ -32,8 +32,8 @@ All 5 critical bugs identified in the audit have been **FIXED AND VERIFIED**:
 - **Status:** VERIFIED - Function correctly named `respeaker_xvf3800_flash_action_to_code` (no double 'x')
 
 #### 5. ✅ Empty AIC3104 Configuration Module
-- **File:** `esphome/components/aic3104/__init__.py`
-- **Status:** VERIFIED - Full configuration schema with proper imports, CONFIG_SCHEMA, and to_code() function
+- **File:** `esphome/components/audio_dac/aic3104.py`
+- **Status:** VERIFIED - Platform schema with proper imports, CONFIG_SCHEMA, and to_code() function
 
 ---
 
@@ -99,10 +99,10 @@ Write-Host "⚠️ NOTE: Store this MD5 hash for configuration validation"
 ### 2.2 Component Structure Validation
 ```powershell
 $components = @(
-    "esphome/components/aic3104/aic3104.h",
-    "esphome/components/aic3104/aic3104.cpp",
+    "esphome/components/audio_dac/aic3104.h",
+    "esphome/components/audio_dac/aic3104.cpp",
     "esphome/components/aic3104/__init__.py",
-    "esphome/components/aic3104/audio_dac.py",
+    "esphome/components/audio_dac/aic3104.py",
     "esphome/components/respeaker_xvf3800/respeaker_xvf3800.h",
     "esphome/components/respeaker_xvf3800/respeaker_xvf3800.cpp",
     "esphome/components/respeaker_xvf3800/__init__.py",
@@ -164,7 +164,7 @@ api:
 # Import custom components
 external_components:
   - source: local
-    components: [aic3104, respeaker_xvf3800]
+    components: [audio_dac, respeaker_xvf3800]
 
 # Audio DAC component (AIC3104)
 audio_dac:
@@ -222,7 +222,7 @@ api_key: !secret api_encryption_key
 # Check Python syntax in custom components
 $python_files = @(
     "esphome/components/aic3104/__init__.py",
-    "esphome/components/aic3104/audio_dac.py",
+    "esphome/components/audio_dac/aic3104.py",
     "esphome/components/respeaker_xvf3800/__init__.py"
 )
 
@@ -387,11 +387,13 @@ Respeaker-XVF3800-ESPHome-integration/
 │   └── respeaker-xvf-test.yaml       📝 New test config
 ├── esphome/
 │   └── components/
-│       ├── aic3104/                  ✅ VERIFIED FIXED
-│       │   ├── __init__.py           ✅ Schema complete
+│       ├── audio_dac/                ✅ VERIFIED FIXED
+│       │   ├── __init__.py           ✅ Base schema + interface
+│       │   ├── aic3104.py            ✅ Platform schema
 │       │   ├── aic3104.h             ✅ Member variable added
-│       │   ├── aic3104.cpp
-│       │   └── audio_dac.py
+│       │   └── aic3104.cpp
+│       ├── aic3104/                  ✅ Legacy shim
+│       │   └── __init__.py
 │       └── respeaker_xvf3800/        ✅ VERIFIED FIXED
 │           ├── __init__.py           ✅ Function name correct
 │           ├── respeaker_xvf3800.h

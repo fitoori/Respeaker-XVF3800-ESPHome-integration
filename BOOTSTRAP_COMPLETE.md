@@ -24,7 +24,7 @@ The ReSpeaker XVF3800 ESPHome integration system has been **successfully bootstr
 All 5 critical bugs identified in the code audit have been **verified as fixed**:
 
 1. **Missing `is_muted_` Member Variable (AIC3104)**
-   - Location: `esphome/components/aic3104/aic3104.h`
+   - Location: `esphome/components/audio_dac/aic3104.h`
    - Status: ✅ VERIFIED - Declared in class
    - Impact: Compilation error resolved
 
@@ -44,8 +44,8 @@ All 5 critical bugs identified in the code audit have been **verified as fixed**
    - Impact: Runtime registration error resolved
 
 5. **Empty AIC3104 Configuration Module**
-   - Location: `esphome/components/aic3104/__init__.py`
-   - Status: ✅ VERIFIED - Full schema and configuration implemented
+   - Location: `esphome/components/audio_dac/aic3104.py`
+   - Status: ✅ VERIFIED - Platform schema and configuration implemented
    - Impact: Component registration failure resolved
 
 ### ✅ Phase 2: Component Validation
@@ -53,11 +53,12 @@ All 5 critical bugs identified in the code audit have been **verified as fixed**
 All component files verified present and functional:
 
 ```
-✅ esphome/components/aic3104/
+✅ esphome/components/audio_dac/
    ├── aic3104.h (9,399 bytes)
    ├── aic3104.cpp (2,768 bytes)
+   ├── aic3104.py (777 bytes)
    ├── __init__.py (788 bytes)
-   └── audio_dac.py (777 bytes)
+   └── audio_dac.h (353 bytes)
 
 ✅ esphome/components/respeaker_xvf3800/
    ├── respeaker_xvf3800.h (9,580 bytes)
@@ -141,11 +142,14 @@ Respeaker-XVF3800-ESPHome-integration/
 │
 ├── 🔧 Custom Components (VERIFIED)
 │   └── esphome/components/
-│       ├── aic3104/                       ✅ Audio DAC component
-│       │   ├── __init__.py                ✅ Config schema (FIXED)
+│       ├── audio_dac/                     ✅ Audio DAC component
+│       │   ├── __init__.py                ✅ Base schema
+│       │   ├── aic3104.py                 ✅ Platform config (FIXED)
 │       │   ├── aic3104.h                  ✅ Header (FIXED)
 │       │   ├── aic3104.cpp                ✅ Implementation
-│       │   └── audio_dac.py               ✅ Audio DAC interface
+│       │   └── audio_dac.h                ✅ Audio DAC interface
+│       ├── aic3104/                       ✅ Legacy shim
+│       │   └── __init__.py
 │       └── respeaker_xvf3800/             ✅ ReSpeaker main component
 │           ├── __init__.py                ✅ Config (FIXED function name)
 │           ├── respeaker_xvf3800.h        ✅ Header

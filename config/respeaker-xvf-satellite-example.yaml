@@ -1493,7 +1493,7 @@ external_components:
       ref: main
     components:
       - respeaker_xvf3800
-      - aic3104
+      - audio_dac
   - source:
       # https://github.com/esphome/esphome/pull/12253
       type: git

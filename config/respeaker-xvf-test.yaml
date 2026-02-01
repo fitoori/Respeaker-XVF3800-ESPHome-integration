@@ -18,7 +18,7 @@ esphome:
   
   # Include custom components from local source
   includes:
-    - esphome/components/aic3104/
+    - esphome/components/audio_dac/
     - esphome/components/respeaker_xvf3800/
 
 # Networking
@@ -55,7 +55,7 @@ logger:
 external_components:
   - source: local
     components:
-      - aic3104
+      - audio_dac
       - respeaker_xvf3800
 
 # I2C Bus Configuration

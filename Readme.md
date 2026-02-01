@@ -16,7 +16,7 @@ This fork adds several enhancements beyond the upstream project:
 ## What's included
 - **ESPHome components**
   - `respeaker_xvf3800`: I2C control of the XVF3800, including mute, DFU firmware update helpers, and LED beam direction telemetry.
-  - `aic3104`: Minimal I2C Audio DAC component stub for the on-board codec.
+  - `audio_dac` (`aic3104` platform): Minimal I2C Audio DAC platform for the on-board codec.
 - **Example ESPHome config**
   - `config/respeaker-xvf-satellite-example.yaml`
 - **Home Assistant scripts**

@@ -68,7 +68,7 @@ class BootstrapValidator:
         self.print_header("Code Audit Fixes Verification")
         
         # Fix 1: Missing is_muted_ member variable
-        fix1_file = self.project_root / "esphome/components/aic3104/aic3104.h"
+        fix1_file = self.project_root / "esphome/components/audio_dac/aic3104.h"
         if fix1_file.exists():
             content = fix1_file.read_text()
             has_fix = "bool is_muted_{false};" in content or "bool is_muted_;" in content
@@ -122,7 +122,7 @@ class BootstrapValidator:
             self.print_check("Fix #4: ReSpeaker __init__.py", False, "File not found")
         
         # Fix 5: AIC3104 configuration module
-        fix5_file = self.project_root / "esphome/components/aic3104/__init__.py"
+        fix5_file = self.project_root / "esphome/components/audio_dac/aic3104.py"
         if fix5_file.exists():
             content = fix5_file.read_text()
             has_imports = "import esphome.codegen" in content and "import esphome.config_validation" in content
@@ -134,17 +134,19 @@ class BootstrapValidator:
                 f"{'✓' if has_imports else 'Missing'} imports, {'✓' if has_schema else 'Missing'} schema, {'✓' if has_to_code else 'Missing'} to_code()"
             )
         else:
-            self.print_check("Fix #5: AIC3104 __init__.py", False, "File not found")
+            self.print_check("Fix #5: AIC3104 platform module", False, "File not found")
     
     # Check 2: Component Files Structure
     def check_component_files(self):
         self.print_header("Component Files Verification")
         
         required_files = [
-            "esphome/components/aic3104/aic3104.h",
-            "esphome/components/aic3104/aic3104.cpp",
+            "esphome/components/audio_dac/aic3104.h",
+            "esphome/components/audio_dac/aic3104.cpp",
+            "esphome/components/audio_dac/aic3104.py",
+            "esphome/components/audio_dac/__init__.py",
+            "esphome/components/audio_dac/audio_dac.h",
             "esphome/components/aic3104/__init__.py",
-            "esphome/components/aic3104/audio_dac.py",
             "esphome/components/respeaker_xvf3800/respeaker_xvf3800.h",
             "esphome/components/respeaker_xvf3800/respeaker_xvf3800.cpp",
             "esphome/components/respeaker_xvf3800/__init__.py",
@@ -220,8 +222,9 @@ class BootstrapValidator:
         self.print_header("Python Syntax Verification")
         
         python_files = [
+            "esphome/components/audio_dac/__init__.py",
+            "esphome/components/audio_dac/aic3104.py",
             "esphome/components/aic3104/__init__.py",
-            "esphome/components/aic3104/audio_dac.py",
             "esphome/components/respeaker_xvf3800/__init__.py",
         ]
         

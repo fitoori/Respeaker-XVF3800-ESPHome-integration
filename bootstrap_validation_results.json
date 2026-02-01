@@ -22,21 +22,21 @@
       "result": true,
       "details": "\u2713 imports, \u2713 schema, \u2713 to_code()"
     },
-    "File exists: esphome/components/aic3104/aic3104.h": {
+    "File exists: esphome/components/audio_dac/aic3104.h": {
       "result": true,
-      "details": "Size: 9399 bytes"
+      "details": "Size: 9278 bytes"
     },
-    "File exists: esphome/components/aic3104/aic3104.cpp": {
+    "File exists: esphome/components/audio_dac/aic3104.cpp": {
       "result": true,
-      "details": "Size: 2768 bytes"
+      "details": "Size: 2670 bytes"
     },
     "File exists: esphome/components/aic3104/__init__.py": {
       "result": true,
-      "details": "Size: 788 bytes"
+      "details": "Size: 159 bytes"
     },
-    "File exists: esphome/components/aic3104/audio_dac.py": {
+    "File exists: esphome/components/audio_dac/aic3104.py": {
       "result": true,
-      "details": "Size: 777 bytes"
+      "details": "Size: 789 bytes"
     },
     "File exists: esphome/components/respeaker_xvf3800/respeaker_xvf3800.h": {
       "result": true,
@@ -78,7 +78,7 @@
       "result": true,
       "details": "Valid syntax"
     },
-    "Python syntax: esphome/components/aic3104/audio_dac.py": {
+    "Python syntax: esphome/components/audio_dac/aic3104.py": {
       "result": true,
       "details": "Valid syntax"
     },
@@ -101,6 +101,18 @@
     "Testing Checklist exists": {
       "result": true,
       "details": "Size: 13655 bytes"
+    },
+    "File exists: esphome/components/audio_dac/__init__.py": {
+      "result": true,
+      "details": "Size: 400 bytes"
+    },
+    "File exists: esphome/components/audio_dac/audio_dac.h": {
+      "result": true,
+      "details": "Size: 369 bytes"
+    },
+    "Python syntax: esphome/components/audio_dac/__init__.py": {
+      "result": true,
+      "details": "Valid syntax"
     }
   },
   "passed": 25,

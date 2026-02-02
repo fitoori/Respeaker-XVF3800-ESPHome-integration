@@ -249,7 +249,7 @@ uint32_t RespeakerXVF3800::load_buf_(uint8_t *buf, const uint8_t max_len, const 
     buf_len = max_len;
   }
 
-  for (uint8_t i = 0; i < max_len; i++) {
+  for (uint8_t i = 0; i < buf_len; i++) {
     buf[i] = this->firmware_bin_[offset + i];
   }
   return buf_len;
